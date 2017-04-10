@@ -21,7 +21,8 @@ OPEN_INVOICES = [
 ]
 
 
-class TestImport(TransactionCase):
+class TestMatchImport(TransactionCase):
+    """simulate a wizard import and check if lines are matched correctly."""
     def setUp(self):
         super(TestImport, self).setUp()
         bank = self.env['res.partner.bank'].create({
