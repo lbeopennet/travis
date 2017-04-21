@@ -7,8 +7,11 @@ from lxml import etree
 import dateutil
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
+from openerp import models
 
-class CamtParser(object):
+
+class CamtParser(models.AbstractModel):
+    _name = 'account.bank.statement.import.camt.parser'
     """Parser for camt bank statement import files."""
 
     def parse_amount(self, ns, node):
