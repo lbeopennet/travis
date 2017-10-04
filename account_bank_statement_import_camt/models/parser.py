@@ -4,8 +4,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import re
 from lxml import etree
-import dateutil
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 from openerp import models
 
@@ -175,10 +173,6 @@ class CamtParser(models.AbstractModel):
             ns, node, './ns:Id', result, 'name')
         self.add_value_from_node(
             ns, node, './ns:CreDtTm', result, 'date')
-        # CreDtTm comes in ISO 8601 format which needs to be parsed further
-        # We intentionally fail import if parsing fails
-        result['date'] = dateutil.parser.parse(
-            result['date']).date().strftime(DEFAULT_SERVER_DATE_FORMAT)
         self.add_value_from_node(
             ns, node, './ns:Acct/ns:Ccy', result, 'currency')
         result['balance_start'], result['balance_end_real'] = (
